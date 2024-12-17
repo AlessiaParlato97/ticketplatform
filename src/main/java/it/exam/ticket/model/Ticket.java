@@ -10,14 +10,33 @@ public class Ticket {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int ticketId;
 	
-	@OneToMany
+	@OneToMany(mappedBy = "ticket")
+    private List<TicketNote> ticketNotes;
+
+	@ManyToOne
+	@JoinColumn(name = "user_id")
 	private Users userId;
 	
 	private String title;
 	
 	private String description;
 	
-	//private enum status;
+    private Date creationDate;
+	
+	private Date closeDate;
+	
+	private String category;
+	
+	@Enumerated(EnumType.STRING)
+    private TicketStatus status;
+	
+	  public TicketStatus getStatus() {
+	        return status;
+	    }
+
+	    public void setStatus(TicketStatus status) {
+	        this.status = status;
+	    }
 	
 	public int getTicketId() {
 		return ticketId;
@@ -26,14 +45,14 @@ public class Ticket {
 	public void setTicketId(int ticketId) {
 		this.ticketId = ticketId;
 	}
+	
+	public Users getUser() {
+        return userId;
+    }
 
-	public Users getUserId() {
-		return userId;
-	}
-
-	public void setUserId(Users userId) {
-		this.userId = userId;
-	}
+    public void setUser(Users user) {
+        this.userId = user;
+    }
 
 	public String getTitle() {
 		return title;
@@ -75,12 +94,6 @@ public class Ticket {
 		this.category = category;
 	}
 
-	private Date creationDate;
-	
-	private Date closeDate;
-	
-	private String category;
-	
 	
 	
 

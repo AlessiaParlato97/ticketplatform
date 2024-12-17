@@ -11,10 +11,15 @@ import java.util.*;
 public class Note {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int noteId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int noteId;
+
+    @OneToMany(mappedBy = "note", cascade = CascadeType.ALL)
+    private List<TicketNote> ticketNotes;
+
 	
-	@ManyToOne
+    @ManyToOne
+	@JoinColumn(name = "user_id")
 	private Users userId;
 	
 	private String text;
@@ -28,14 +33,15 @@ public class Note {
 	public void setNoteId(int noteId) {
 		this.noteId = noteId;
 	}
+	
+	public Users getUser() {
+        return userId;
+    }
 
-	public Users getUserId() {
-		return userId;
-	}
+    public void setUser(Users user) {
+        this.userId = user;
+    }
 
-	public void setUserId(Users userId) {
-		this.userId = userId;
-	}
 
 	public String getText() {
 		return text;
@@ -53,6 +59,16 @@ public class Note {
 		this.creationDate = creationDate;
 	}
 	
-	
+	public void setTicket(Ticket ticket) {
+	    // Metodo di supporto per associare la nota a un ticket
+	    TicketNote ticketNote = new TicketNote();
+	    ticketNote.setTicket(ticket);
+	    ticketNote.setNote(this);
+	    if (this.ticketNotes == null) {
+	        this.ticketNotes = new ArrayList<>();
+	    }
+	    this.ticketNotes.add(ticketNote);
+	}
+
 	
 }

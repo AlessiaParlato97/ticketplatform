@@ -21,7 +21,15 @@ public class Users {
 		
 		private String password;
 		
-		//private enum available;
+		private AvailableStatus available;
+		
+		 public AvailableStatus getAvailable() {
+		        return available;
+		    }
+
+		    public void setAvailable(AvailableStatus available) {
+		        this.available = available;
+		    }
 		
 
 		public int getUserId() {
@@ -65,7 +73,10 @@ public class Users {
 		}
 		
 		
-		
+		public boolean isAvailable() {
+		    return this.available == AvailableStatus.DISPONIBILE;
+		}
+
 		
 		
 
