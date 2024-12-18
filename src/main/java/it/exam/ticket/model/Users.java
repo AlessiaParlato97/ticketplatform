@@ -11,7 +11,7 @@ public class Users {
 		private int userId;
 		
 		@ManyToOne
-		private UsersType usersType;
+		private UsersType usersTypeId;
 		
 		private String name;
 		

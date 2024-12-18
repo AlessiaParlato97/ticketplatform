@@ -10,8 +10,12 @@ public class Ticket {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int ticketId;
 	
-	@OneToMany(mappedBy = "ticket")
-    private List<TicketNote> ticketNotes;
+	@ManyToMany
+	@JoinTable(
+	  name = "ticket_note", 
+	  joinColumns = @JoinColumn(name = "ticket_id"), 
+	  inverseJoinColumns = @JoinColumn(name = "note_id"))
+ List<Note> listNotes;
 
 	@ManyToOne
 	@JoinColumn(name = "user_id")

@@ -10,8 +10,8 @@ import java.util.*;
 public class UsersType {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int userTypeId;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int usersTypeId;
 	
 	private String category;
 	
@@ -21,11 +21,11 @@ public class UsersType {
 
 	
 	public int getUserTypeId() {
-		return userTypeId;
+		return usersTypeId;
 	}
 
 	public void setUserTypeId(int userTypeId) {
-		this.userTypeId = userTypeId;
+		this.usersTypeId = userTypeId;
 	}
 
 	public String getCategory() {

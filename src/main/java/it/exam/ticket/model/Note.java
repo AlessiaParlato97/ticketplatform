@@ -14,8 +14,12 @@ public class Note {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int noteId;
 
-    @OneToMany(mappedBy = "note", cascade = CascadeType.ALL)
-    private List<TicketNote> ticketNotes;
+	@ManyToMany
+	@JoinTable(
+	  name = "ticket_note", 
+	  joinColumns = @JoinColumn(name = "note_id"), 
+	  inverseJoinColumns = @JoinColumn(name = "ticket_id"))
+	List<Ticket> listTickets;
 
 	
     @ManyToOne
@@ -59,16 +63,6 @@ public class Note {
 		this.creationDate = creationDate;
 	}
 	
-	public void setTicket(Ticket ticket) {
-	    // Metodo di supporto per associare la nota a un ticket
-	    TicketNote ticketNote = new TicketNote();
-	    ticketNote.setTicket(ticket);
-	    ticketNote.setNote(this);
-	    if (this.ticketNotes == null) {
-	        this.ticketNotes = new ArrayList<>();
-	    }
-	    this.ticketNotes.add(ticketNote);
-	}
 
 	
 }
